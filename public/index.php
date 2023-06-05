@@ -1,16 +1,21 @@
 <?php
-include_once __DIR__ . '/../database/Connect.php';
-include_once __DIR__ . '/../mvc/Views/CurrenciesTable.php';
+include_once __DIR__ . '/../mvc/Views/navbar.php';
+include_once __DIR__ . '/../database/CurrenciesTable.php';
+include_once __DIR__ . '/../mvc/Models/Currencies.php';
+//Paginacja
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $recordsPerPage = 10;
 $offset = ($page - 1) * $recordsPerPage;
 
-$table = new \Views\CurrenciesTable();
+$table = new \CurrenciesTable();
 $tableData = $table->getTableData($recordsPerPage, $offset);
 $displayValues = $tableData['data'];
 
 $totalRecords = $tableData['totalRecords'];
 $totalPages = ceil($totalRecords / $recordsPerPage);
+
+
+
 
 ?>
 
@@ -18,6 +23,7 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Title</title>
 </head>
 <body>
@@ -46,9 +52,10 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
 
 <div class="pagination">
     <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-        <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+        <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
     <?php endfor; ?>
 </div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>

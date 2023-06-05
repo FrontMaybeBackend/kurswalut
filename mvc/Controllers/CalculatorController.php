@@ -1,10 +1,10 @@
 <?php
 
 namespace Controllers;
-include_once __DIR__ . '/../../mvc/Models/Currencies.php';
+include_once __DIR__ . '/../classes/Calcu';
 
 include('database/Connect.php');
-class CurrencyController extends \Currencies
+class CalculatorController extends \CalculatorCurrencies
 {
 
     public function updateCurrencies(){

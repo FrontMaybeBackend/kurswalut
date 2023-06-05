@@ -1,7 +1,6 @@
 <?php
 
-namespace Views;
-include_once __DIR__ . '/../../database/Connect.php';
+include_once __DIR__ . '/Connect.php';
 class CurrenciesTable extends \Connect
 {
 
@@ -20,12 +19,21 @@ class CurrenciesTable extends \Connect
         $countResult = $countStatement->fetch();
         $totalRecords = $countResult['count'];
 
-        $this->conn = null;
+
 
         return [
             'data' => $results,
             'totalRecords' => $totalRecords
         ];
+    }
+
+    public function getCurrencies(){
+        $query = "SELECT currency, rate FROM kurs_walut";
+        $statement = $this->conn->prepare($query);
+        $statement->execute();
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC); // Użyj FETCH_ASSOC, aby otrzymać wyniki w postaci asocjacyjnej
+
+        return $results; // Zwróć wyniki bez dodatkowego opakowania
     }
 
 
