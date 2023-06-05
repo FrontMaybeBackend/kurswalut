@@ -28,7 +28,7 @@ class CurrenciesTable extends \Connect
     }
 
     public function getCurrencies(){
-        $query = "SELECT currency, rate FROM kurs_walut";
+        $query = "SELECT currency, rate FROM kurs_walut ";
         $statement = $this->conn->prepare($query);
         $statement->execute();
         $results = $statement->fetchAll(PDO::FETCH_ASSOC); // Użyj FETCH_ASSOC, aby otrzymać wyniki w postaci asocjacyjnej

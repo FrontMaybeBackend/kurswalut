@@ -44,7 +44,7 @@ $currency = $show->getCurrencies();
     <form id="4" method="POST">
         <div class="mb-3">
             <label for="current_currency" class="form-label">Current Currency</label>
-            <input  class="form-control" name="current_currency" id="current_currency">
+            <input  type="number" class="form-control" name="current_currency" id="current_currency">
             <select class="form-select" id="current_select" name="current_select" aria-label="Default select example">
                 <option selected>Wybierz Walutę</option>
                 <?php foreach($currency as $result) :?>

@@ -9,7 +9,7 @@ class CalculatorCurrencies extends \CurrenciesTable
 
     public  $calculated_value;
 
-    public  $score;
+    public  float $score;
 
     public function __construct(  $current_currency,  $selected_current,  $calculated_value)
     {
@@ -59,7 +59,7 @@ class CalculatorCurrencies extends \CurrenciesTable
 
     public function validationCalc(){
         $calc = true;
-        if(empty($this->current_currency) || empty($this->selected_current)){
+        if(empty($this->current_currency) || empty($this->selected_current || empty($this->calculated_value))){
             $calc = false;
         }else{
             $calc  = true;
@@ -70,7 +70,7 @@ class CalculatorCurrencies extends \CurrenciesTable
     public function valIsFloat()
     {
         $calcNum = true;
-        if (!is_float($this->current_currency)) {
+        if (!is_numeric($this->current_currency)) {
             $calcNum = false;
         }else{
             $calcNum = true;
