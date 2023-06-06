@@ -14,9 +14,12 @@ $displayValues = $tableData['data'];
 $totalRecords = $tableData['totalRecords'];
 $totalPages = ceil($totalRecords / $recordsPerPage);
 
+//Zaaktualizuj tabele z kursami.
+$time = new Currencies();
 
-
-
+if(date("H:i:s") >= date("21:59:00")){
+    $time->updateCurrencies();
+}
 ?>
 
 <!DOCTYPE html>
@@ -27,6 +30,7 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
     <title>Title</title>
 </head>
 <body>
+
 <table class="table table-hover table-dark">
     <thead>
     <tr>
@@ -55,7 +59,6 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
         <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
     <?php endfor; ?>
 </div>
-
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>

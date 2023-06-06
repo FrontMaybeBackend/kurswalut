@@ -1,30 +1,15 @@
 <?php
-include_once __DIR__ . '/../../src/classes/CalculatorCurrencies.php';
 include_once __DIR__ . '/../../database/CurrenciesTable.php';
-
+include_once __DIR__ . '/../../mvc/Controllers/CalculatorController.php';
 //Przesłanie formularza, sprawdź czy są przesłane dane.
-if (isset($_POST['Calculate'])) {
 
-    //Wartość do obliczenia
-    $current = floatval($_POST['current_currency']);
-    //Wybrana waluta
-    $selected_current = floatval($_POST['current_select']);
-    // Docelowa waluta
-    $selected_target = floatval($_POST['target']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $currentCurrency =  floatval($_POST['current_currency']);
+    $currentSelect = floatval($_POST['current_select']);
+    $targetSelect = floatval($_POST['target']);
 
-
-
-    $score = new CalculatorCurrencies($current,$selected_current,$selected_target);
-    $Calculate =$score->calc();
-    var_dump($current);
-    echo " <- to wartosc wpisana \n";
-
-    var_dump($selected_current);
-    echo "<- to z selecta \n";
-    var_dump($selected_target);
-    echo " <- to z drugiego selecta\n";
-
-
+    $value = new \Controllers\CalculatorController($currentCurrency, $currentSelect, $targetSelect);
+    $Calculate = $value ->Calc();
 }
 $show = new CurrenciesTable();
 $currency = $show->getCurrencies();
@@ -48,7 +33,7 @@ $currency = $show->getCurrencies();
             <select class="form-select" id="current_select" name="current_select" aria-label="Default select example">
                 <option selected>Wybierz Walutę</option>
                 <?php foreach($currency as $result) :?>
-                <option value="<?php echo $result['rate']?>"><?php echo $result['currency']?></option>
+                <option value="<?php echo $result['rate']; ?>"><?php echo $result['rate'] . ' - ' . $result['currency']; ?></option>
                 <?php endforeach ;?>
             </select>
         </div>
@@ -56,7 +41,7 @@ $currency = $show->getCurrencies();
             <select class="form-select" id="target" name="target" aria-label="Default select example">
                 <option selected>Wymień na</option>
                 <?php foreach($currency as $result) :?>
-                    <option value="<?php echo $result['rate']?>"><?php echo $result['currency']?></option>
+                    <option value="<?php echo $result['rate']; ?>"><?php echo $result['rate'] . ' - ' . $result['currency']; ?></option>
                 <?php endforeach ;?>
             </select>
         </div>

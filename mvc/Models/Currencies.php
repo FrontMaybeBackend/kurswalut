@@ -4,8 +4,6 @@ class Currencies extends Connect
 {
     protected $url;
 
-    public $startDate = '2023-04-01';
-    public $endDate = '2023-06-03';
 
     public $rates;
 
@@ -18,7 +16,7 @@ class Currencies extends Connect
 
     public function getExchangesRates()
     {
-        $this->url = "https://api.nbp.pl/api/exchangerates/tables/A/{$this->startDate}/{$this->endDate}/?format=json";
+        $this->url = "https://api.nbp.pl/api/exchangerates/tables/A/?format=json";
         $data = file_get_contents($this->url);
 
         if ($data === false) {
@@ -44,7 +42,7 @@ class Currencies extends Connect
             $effectiveDate = $this->rates[0]['effectiveDate']; // Value from the API response
             $currency = $rate['currency']; // Value from the API response
             $currencyCode = $rate['code']; // Value from the API response
-            $rateValue = $rate['mid'];     // Value from the API response
+            $rateValue = $rate['mid'] ;     // Value from the API response
 
             $statement->bindParam(':table_name', $tableName);
             $statement->bindParam(':effective_date', $effectiveDate);
@@ -56,4 +54,26 @@ class Currencies extends Connect
         }
 
     }
+
+    public function updateCurrencies(){
+        $this->rates = $this->getExchangesRates();
+        $statement = $this->conn ->prepare( 'UPDATE kurs_walut SET rate =:rate WHERE table_name =:table_name AND effective_date = :effective_date AND currency = :currency AND code = :code');
+        foreach ($this->rates[0]['rates'] as $rate) {
+            $tableName = $this->rates[0]['table']; // Name of the table from the API response
+            $effectiveDate = $this->rates[0]['effectiveDate']; // Value from the API response
+            $currency = $rate['currency']; // Value from the API response
+            $currencyCode = $rate['code']; // Value from the API response
+            $rateValue = $rate['mid'];     // Value from the API response
+
+            $statement->bindParam(':table_name', $tableName);
+            $statement->bindParam(':effective_date', $effectiveDate);
+            $statement->bindParam(':currency', $currency);
+            $statement->bindParam(':code', $currencyCode);
+            $statement->bindParam(':rate', $rateValue);
+
+            $statement->execute();
+        }
+    }
+
+
 }
