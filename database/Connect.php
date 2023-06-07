@@ -13,7 +13,6 @@ class Connect
            echo "Failed:" . $e->getMessage();
        }
 
-
    }
 
 

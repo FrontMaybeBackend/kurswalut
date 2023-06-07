@@ -1,6 +1,6 @@
 <?php
 include_once __DIR__ . '/../../database/Connect.php';
-class Currencies extends Connect
+class CurrenciesAPI extends Connect
 {
     protected $url;
 
@@ -16,7 +16,7 @@ class Currencies extends Connect
 
     public function getExchangesRates()
     {
-        $this->url = "https://api.nbp.pl/api/exchangerates/tables/A/?format=json";
+        $this->url = "https://api.nbp.pl/api/exchangerates/tables/B/?format=json";
         $data = file_get_contents($this->url);
 
         if ($data === false) {
@@ -35,7 +35,7 @@ class Currencies extends Connect
 
     public function insertCurrencies(){
         $this->rates = $this->getExchangesRates();
-        $statement = $this->conn->prepare("INSERT INTO kurs_walut (table_name, effective_date, currency, code,rate) VALUES (:table_name, :effective_date, :currency, :code,:rate)");
+        $statement = $this->conn->prepare("INSERT INTO currency_rate (table_name, effective_date, currency, code,rate) VALUES (:table_name, :effective_date, :currency, :code,:rate)");
 
         foreach ($this->rates[0]['rates']as $rate) {
             $tableName = $this->rates[0]['table']; // Name of the table from the API response
@@ -57,7 +57,7 @@ class Currencies extends Connect
 
     public function updateCurrencies(){
         $this->rates = $this->getExchangesRates();
-        $statement = $this->conn ->prepare( 'UPDATE kurs_walut SET rate =:rate WHERE table_name =:table_name AND effective_date = :effective_date AND currency = :currency AND code = :code');
+        $statement = $this->conn ->prepare( 'UPDATE currency_rate SET rate =:rate WHERE table_name =:table_name AND effective_date = :effective_date AND currency = :currency AND code = :code');
         foreach ($this->rates[0]['rates'] as $rate) {
             $tableName = $this->rates[0]['table']; // Name of the table from the API response
             $effectiveDate = $this->rates[0]['effectiveDate']; // Value from the API response

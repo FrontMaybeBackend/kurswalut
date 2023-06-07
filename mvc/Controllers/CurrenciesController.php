@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-class CurrenciesController extends \Currencies
+class CurrenciesController extends \CurrenciesAPI
 {
 
     public function render($file) {
