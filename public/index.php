@@ -23,7 +23,7 @@ if(date("H:i:s") >= date("21:59:00")){
 //Pobierz i wyświetl tabelę z ostatnimi przewalutowaniami.
 $converts = $table ->getConvertCurrencies();
 
-//JEŚLI CHCESZ DODAĆ WALUTY DO BAZY ODKOMENTUJ !! WIEM, ZE POWINNO TO BYC RACZEJ INACZEJ ZROBIONE, Z GORY PRZEPRASZAM !
+//JEŚLI CHCESZ DODAĆ WALUTY DO BAZY ODKOMENTUJ !!
 //$ŁADUJEMY = new CurrenciesAPI();
 //$jadom = $ŁADUJEMY->insertCurrencies();
 

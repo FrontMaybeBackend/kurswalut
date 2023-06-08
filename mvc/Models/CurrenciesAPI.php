@@ -16,7 +16,7 @@ class CurrenciesAPI extends Connect
 
     public function getExchangesRates()
     {
-        $this->url = "https://api.nbp.pl/api/exchangerates/tables/B/?format=json";
+        $this->url = "https://api.nbp.pl/api/exchangerates/tables/A/?format=json";
         $data = file_get_contents($this->url);
 
         if ($data === false) {
