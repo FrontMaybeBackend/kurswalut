@@ -37,7 +37,7 @@ include_once __DIR__ . '/../Views/navbar.php';
             <label for="current_currency">Current Currency</label>
             <input type="number" min="1" class="form-control" name="current_currency" id="current_currency" required>
             <select class="form-select" id="current_select" name="current_select" aria-label="Default select example" required>
-                <option value="">Wybierz Walutę</option>
+                <option value="">Select Currency</option>
                 <?php foreach ($currency as $result) : ?>
                     <?php $id = $result['id'];
                     //Jeśli waluta ma wartość 0 to nie pokazuj w formularzu
@@ -50,7 +50,7 @@ include_once __DIR__ . '/../Views/navbar.php';
         </div>
         <div class="form-group">
             <select class="form-select" id="target" name="target" aria-label="Default select example" required>
-                <option value="">Wymień na</option>
+                <option value="">Exchange at</option>
                 <?php foreach ($currency as $result) : ?>
                     <?php $id = $result['id'];
                     //Jeśli waluta ma wartość 0 to nie pokazuj w formularzu
@@ -62,7 +62,7 @@ include_once __DIR__ . '/../Views/navbar.php';
             </select>
         </div>
         <button id="Calculate" type="submit" name="Calculate">Calculate</button>
-        <label for="Score" class="result-label">Wartość: <?php if (isset($Calculate)) { echo $Calculate; } ?></label>
+        <label for="Score" class="result-label">Value: <?php if (isset($Calculate)) { echo $Calculate; } ?></label>
     </form>
 </div>
 </body>

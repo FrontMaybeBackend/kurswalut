@@ -20,10 +20,10 @@ $source = $table ->getSourceCurrent();
 <table class="table table-hover table-dark">
     <thead>
     <tr>
-        <th scope="col">Kwota</th>
-        <th scope="col">Z</th>
-        <th scope="col">Na</th>
-        <th scope="col">Kwota Końcowa</th>
+        <th scope="col">Price</th>
+        <th scope="col">From</th>
+        <th scope="col">At</th>
+        <th scope="col">Final amount</th>
     </tr>
     </thead>
     <tbody>
