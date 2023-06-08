@@ -35,8 +35,8 @@ $source = $table ->getSourceCurrent();
         <?php $sources = $source[$index]; ?>
         <tr>
             <td><?php echo $convert['initial_value']; ?></td>
-            <td><?php echo $sources['source_currencies'] . ' ' . $sources['currency']; ?></td>
             <td><?php echo $convert['currency'] . ' ' . $convert['rate']; ?></td>
+            <td><?php echo $sources['currency'] . ' ' . $sources['rate']; ?></td>
             <td><?php echo $convert['converted_amount']; ?></td>
         </tr>
     <?php endforeach; ?>

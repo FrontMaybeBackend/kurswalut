@@ -33,7 +33,7 @@ class CurrenciesTable extends \Connect
     }
 
     public function getCurrencies(){
-        $query = "SELECT currency, rate,code FROM currency_rate ";
+        $query = "SELECT currency, rate,id FROM currency_rate ";
         $statement = $this->conn->prepare($query);
         $statement->execute();
         $results = $statement->fetchAll(PDO::FETCH_ASSOC); // Użyj FETCH_ASSOC, aby otrzymać wyniki w postaci asocjacyjnej
@@ -41,8 +41,9 @@ class CurrenciesTable extends \Connect
         return $results; // Zwróć wyniki bez dodatkowego opakowania
     }
 
+    //Połączenia do zwracania danych do widoku.
     public function getConvertCurrencies(){
-        $query = "SELECT initial_value, rate_kurs,currency,rate, converted_amount FROM converted_currencies INNER JOIN currency_rate ON converted_currencies.rate_kurs=currency_rate.rate";
+        $query = "SELECT * FROM converted_currencies INNER JOIN currency_rate ON converted_currencies.source_currencies=currency_rate.id";
         $statement = $this->conn->prepare($query);
         $statement->execute();
         $convert = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -51,13 +52,14 @@ class CurrenciesTable extends \Connect
     }
 
     public function getSourceCurrent(){
-        $query = "SELECT source_currencies, currency FROM converted_currencies INNER JOIN currency_rate ON converted_currencies.rate_kurs=currency_rate.rate";
+        $query = "SELECT * FROM converted_currencies INNER JOIN currency_rate ON converted_currencies.rate_kurs=currency_rate.id;";
         $statement = $this->conn->prepare($query);
         $statement->execute();
         $source = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return $source;
     }
+
 
 
 }
