@@ -1,10 +1,12 @@
 <?php
-include_once __DIR__ . '/../Views/navbar.php';
-include_once __DIR__ . '/../../database/CurrenciesTable.php';
+include_once __DIR__ . '/navbar.php';
+
+include_once __DIR__ . '/../database/CurrenciesTable.php';
+
 
 $table = new \CurrenciesTable();
-$converts = $table ->getConvertCurrencies();
-$source = $table ->getSourceCurrent();
+$converts = $table->getConvertCurrencies();
+$source = $table->getSourceCurrent();
 ?>
 
 
@@ -12,7 +14,8 @@ $source = $table ->getSourceCurrent();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="/public/style.css" rel="stylesheet">
     <title>Title</title>
 </head>
@@ -44,6 +47,8 @@ $source = $table ->getSourceCurrent();
 </table>
 
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </html>
 

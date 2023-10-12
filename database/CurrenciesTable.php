@@ -1,6 +1,7 @@
 <?php
 
 include_once __DIR__ . '/Connect.php';
+
 class CurrenciesTable extends \Connect
 {
 
@@ -9,7 +10,8 @@ class CurrenciesTable extends \Connect
         parent::__construct();
     }
 
-    public function getTableData($limit, $offset) {
+    public function getTableData($limit, $offset)
+    {
         $query = "SELECT effective_date, currency, code, rate FROM 	currency_rate LIMIT :limit OFFSET :offset";
         $countQuery = "SELECT COUNT(*) as count FROM currency_rate";
 
@@ -25,14 +27,14 @@ class CurrenciesTable extends \Connect
         $totalRecords = $countResult['count'];
 
 
-
         return [
             'data' => $results,
             'totalRecords' => $totalRecords
         ];
     }
 
-    public function getCurrencies(){
+    public function getCurrencies()
+    {
         $query = "SELECT currency, rate,id FROM currency_rate ";
         $statement = $this->conn->prepare($query);
         $statement->execute();
@@ -42,7 +44,8 @@ class CurrenciesTable extends \Connect
     }
 
     //Połączenia do zwracania danych do widoku.
-    public function getConvertCurrencies(){
+    public function getConvertCurrencies()
+    {
         $query = "SELECT * FROM converted_currencies INNER JOIN currency_rate ON converted_currencies.source_currencies=currency_rate.id";
         $statement = $this->conn->prepare($query);
         $statement->execute();
@@ -51,7 +54,8 @@ class CurrenciesTable extends \Connect
         return $convert;
     }
 
-    public function getSourceCurrent(){
+    public function getSourceCurrent()
+    {
         $query = "SELECT * FROM converted_currencies INNER JOIN currency_rate ON converted_currencies.rate_kurs=currency_rate.id;";
         $statement = $this->conn->prepare($query);
         $statement->execute();
@@ -59,7 +63,6 @@ class CurrenciesTable extends \Connect
 
         return $source;
     }
-
 
 
 }

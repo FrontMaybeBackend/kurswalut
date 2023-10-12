@@ -1,6 +1,6 @@
 <?php
 include_once __DIR__ . '/../database/CurrenciesTable.php';
-include_once __DIR__ . '/../mvc/Models/CurrenciesAPI.php';
+include_once __DIR__ . '/../classes/CurrenciesAPI.php';
 
 //Paginacja
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -14,27 +14,27 @@ $displayValues = $tableData['data'];
 $totalRecords = $tableData['totalRecords'];
 $totalPages = ceil($totalRecords / $recordsPerPage);
 
-//Zaaktualizuj tabele z kursami.
-$time = new CurrenciesAPI();
-if(date("H:i:s") >= date("21:59:00")){
-    $time->updateCurrencies();
-}
 
 //Pobierz i wyświetl tabelę z ostatnimi przewalutowaniami.
-$converts = $table ->getConvertCurrencies();
+$converts = $table->getConvertCurrencies();
 
 //JEŚLI CHCESZ DODAĆ WALUTY DO BAZY ODKOMENTUJ !!
 //$ŁADUJEMY = new CurrenciesAPI();
 //$jadom = $ŁADUJEMY->insertCurrencies();
 
+//UPDATE WALUT
+$time = new CurrenciesApi();
+$update  = $time->updateCurrencies();
+
 
 ?>
- <?php include_once __DIR__ . '/../mvc/Views/navbar.php'; ?>
+<?php include_once __DIR__ . '/../Views/navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="/public/style.css" rel="stylesheet">
     <title>Title</title>
 </head>
@@ -53,7 +53,7 @@ $converts = $table ->getConvertCurrencies();
     <!-- Tabela Kursów Walut -->
     <p class="text-center"> Current Currencies</p>
     <tbody>
-    <?php foreach($displayValues as $currency): ?>
+    <?php foreach ($displayValues as $currency): ?>
         <tr>
             <td><?php echo $currency['effective_date']; ?></td>
             <td><?php echo $currency['currency']; ?></td>
@@ -71,5 +71,7 @@ $converts = $table ->getConvertCurrencies();
 </div>
 
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </html>

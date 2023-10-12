@@ -12,18 +12,19 @@ class ConvertCurrencies extends Connect
     public float $value;
 
 
-    public function __construct($current_currency,$selected_current, $calculated_value, $value)
+    public function __construct($current_currency, $selected_current, $calculated_value, $value)
     {
         $this->current_currency = $current_currency;
         $this->selected_current = $selected_current;
         $this->calculated_value = $calculated_value;
-        $this->value=$value;
+        $this->value = $value;
 
     }
 
-    public function insertConvertCurrencies(){
+    public function insertConvertCurrencies()
+    {
         $query = new  Connect();
-        $conn  = $query->conn;
+        $conn = $query->conn;
         $query = "INSERT INTO converted_currencies (initial_value, source_currencies, rate_kurs, converted_amount) VALUES (:initial_value, :source_currencies, :rate_kurs, :converted_amount)";
         $statement = $conn->prepare($query);
         $statement->bindParam(':initial_value', $this->current_currency);
@@ -33,7 +34,6 @@ class ConvertCurrencies extends Connect
 
         $statement->execute();
     }
-
 
 
 }
