@@ -28,7 +28,7 @@ $update  = $time->updateCurrencies();
 
 
 ?>
-<?php include_once __DIR__ . '/../Views/navbar.php'; ?>
+<?php include_once __DIR__ . '/../views/navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -7,10 +7,10 @@
                 <a class="nav-link mx-2" href="/public/index.php"><i class="fas fa-plus-circle pe-2"></i>Currencies</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link mx-2" href="/Views/calculator.php"><i class="fas fa-bell pe-2"></i>Calculator</a>
+                <a class="nav-link mx-2" href="/views/calculator.php"><i class="fas fa-bell pe-2"></i>Calculator</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link mx-2" href="/Views/exchanges.php"><i class="fas fa-bell pe-2"></i>Exchanges</a>
+                <a class="nav-link mx-2" href="/views/exchanges.php"><i class="fas fa-bell pe-2"></i>Exchanges</a>
             </li>
         </ul>
     </div>
